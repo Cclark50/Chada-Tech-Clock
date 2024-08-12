@@ -1,6 +1,7 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include "Clock.h"
 using namespace std;
 
 /*@Author Christian Clark
@@ -11,157 +12,6 @@ using namespace std;
  *an hour, minute, or second to it one at a time
  *The program will also ask the user to set the time of the clock at the start
  */
-
-
-//This class holds the hours, minutes, and seconds of the clock
-class Clock
-{
-public:
-    //getters and setters
-    unsigned int getSeconds(){return seconds;}
-    unsigned int getMinutes(){return minutes;}
-    unsigned int getHours(){return hours;}
-    void setSeconds(unsigned int seconds){this->seconds = seconds;}
-    void setMinutes(unsigned int minutes){this->minutes = minutes;}
-    void setHours(unsigned int hours){this->hours = hours;}
-    void addOneHour();
-    void addOneMinute();
-    void addOneSecond();
-    void displayClocks();
-    string formatTime12(unsigned int h, unsigned int m, unsigned int s);
-    string formatTime24(unsigned int h, unsigned int m, unsigned int s);
-    string nCharClockString(size_t n, char c);
-    string twoDigitString(unsigned int n);
-    //default constructor
-    Clock();
-    //more useful overloaded constructor
-    Clock(unsigned int h, unsigned int m, unsigned int s);
-private:
-    //variables to hold said hours minutes seconds
-    unsigned int seconds;
-    unsigned int minutes;
-    unsigned int hours;
-};
-
-Clock::Clock()
-{
-    seconds = 0;
-    minutes = 0;
-    hours = 0;
-}
-
-Clock::Clock(unsigned int h, unsigned int m, unsigned int s)
-{
-    hours = h;
-    minutes = m;
-    seconds = s;
-}
-
-//adds 1 hour to the clock
-void Clock::addOneHour()
-{
-    if(hours == 23)
-    {
-        setHours(0);
-    }
-    else
-    {
-        setHours(hours + 1);
-    }
-}
-
-//adds one minute to the clock
-void Clock::addOneMinute()
-{
-    if(minutes == 59)
-    {
-        addOneHour();
-        setMinutes(0);
-    }
-    else
-    {
-        setMinutes(minutes + 1);
-    }
-}
-
-//adds one second to the clock
-void Clock::addOneSecond()
-{
-    if(seconds == 59)
-    {
-        addOneMinute();
-        setSeconds(0);
-    }
-    else
-    {
-        setSeconds(seconds + 1);
-    }
-}
-//takes an input a number and turns it into a 2 digit string
-string Clock::twoDigitString(unsigned int n)
-{
-    string str = "";
-    //if we have a number less than 9, it gets a 0 prepended to it
-    if(n <= 9)
-    {
-        str += '0';
-    }
-    str += to_string(n);
-    return str;
-}
-
-//returns a string of a character entered that is n characters long
-string Clock::nCharClockString(size_t n, char c)
-{
-    string str = "";
-    for(int i = 0; i < n; i++)
-    {
-        str += c;
-    }
-    return str;
-}
-
-//formats time like a 24 hour clock
-string Clock::formatTime24(unsigned int h, unsigned int m, unsigned int s)
-{
-    string str = "";
-    str += twoDigitString(h);
-    str += ':';
-    str += twoDigitString(m);
-    str += ':';
-    str += twoDigitString(s);
-    return str;
-}
-
-//formats time like a 12 hour clock
-string Clock::formatTime12(unsigned int h, unsigned int m, unsigned int s)
-{
-    //0 is midnight 12 is noon
-    //if we're under 12 hours, then isPM is a string representing AM
-    string isPM = "A M";
-    //newh is a temporary hold of h to do calculations with
-    int newh = h;
-    string str = "";
-    //above or equal to 12 hours then we have isPM set to PM instead
-    if(h >= 12)
-    {
-        isPM = "P M";
-        newh = h - 12;
-    }
-    //if we're at 12 either am or pm, append 12 to the string
-    if(newh == 0)
-    {
-        str += "12";
-    }
-    else
-    {
-        str += twoDigitString(newh);
-    }
-
-    str = str + ':' + twoDigitString(m) + ':' + twoDigitString(s) + ' ' + isPM;
-
-    return str;
-}
 
 string nCharString(size_t n, char c)
 {
@@ -218,20 +68,6 @@ unsigned int getMenuChoice(unsigned int maxChoice)
     }while(true);
 }
 
-//displays both the 12 and 24 hour clocks side by side
-void Clock::displayClocks()
-{
-    unsigned int h = hours;
-    unsigned int m = minutes;
-    unsigned int s = seconds;
-    cout << nCharClockString(27, '*') << nCharClockString(3, ' ') << nCharClockString(27, '*') << endl;
-    cout << nCharClockString(1, '*') << nCharClockString(6, ' ') << "12-HOUR CLOCK" << nCharClockString(6, ' ') << nCharClockString(1, '*') << nCharClockString(3, ' ');
-    cout << nCharClockString(1, '*') << nCharClockString(6, ' ') << "24-HOUR CLOCK" << nCharClockString(6, ' ') << nCharClockString(1, '*') << endl;
-    cout << endl;
-    cout << nCharClockString(1, '*') << nCharClockString(6, ' ') << formatTime12(h, m, s) << nCharClockString(7, ' ') << nCharClockString(1, '*') << nCharClockString(3, ' ');
-    cout << nCharClockString(1, '*') << nCharClockString(8, ' ') << formatTime24(h, m, s) << nCharClockString(9, ' ') << nCharClockString(1, '*') << endl;
-    cout << nCharClockString(27, '*') << nCharClockString(3, ' ') << nCharClockString(27, '*') << endl;
-}
 
 //loops to get and use user input to manipulate the clock
 void mainMenu(Clock& clock)
