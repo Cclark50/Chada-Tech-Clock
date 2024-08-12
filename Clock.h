@@ -7,6 +7,8 @@
 
 #include <string>
 
+//test comment
+
 //This class holds the hours, minutes, and seconds of the clock
 class Clock
 {
