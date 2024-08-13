@@ -5,6 +5,16 @@
 #include "Clock.h"
 #include <iostream>
 
+//returns a string of a character entered that is n characters long
+std::string nCharString(size_t n, char c)
+{
+    std::string str = "";
+    for(int i = 0; i < n; i++)
+    {
+        str += c;
+    }
+    return str;
+}
 
 Clock::Clock()
 {
@@ -73,16 +83,6 @@ std::string Clock::twoDigitString(unsigned int n)
     return str;
 }
 
-//returns a string of a character entered that is n characters long
-std::string Clock::nCharClockString(size_t n, char c)
-{
-    std::string str = "";
-    for(int i = 0; i < n; i++)
-    {
-        str += c;
-    }
-    return str;
-}
 
 //formats time like a 24 hour clock
 std::string Clock::formatTime24(unsigned int h, unsigned int m, unsigned int s)
@@ -132,12 +132,13 @@ void Clock::displayClocks()
     unsigned int h = hours;
     unsigned int m = minutes;
     unsigned int s = seconds;
-    std::cout << nCharClockString(27, '*') << nCharClockString(3, ' ') << nCharClockString(27, '*') << std::endl;
-    std::cout << nCharClockString(1, '*') << nCharClockString(6, ' ') << "12-HOUR CLOCK" << nCharClockString(6, ' ') << nCharClockString(1, '*') << nCharClockString(3, ' ');
-    std::cout << nCharClockString(1, '*') << nCharClockString(6, ' ') << "24-HOUR CLOCK" << nCharClockString(6, ' ') << nCharClockString(1, '*') << std::endl;
+    std::cout << nCharString(27, '*') << nCharString(3, ' ') << nCharString(27, '*') << std::endl;
+    std::cout << nCharString(1, '*') << nCharString(6, ' ') << "12-HOUR CLOCK" << nCharString(6, ' ') << nCharString(1, '*') << nCharString(3, ' ');
+    std::cout << nCharString(1, '*') << nCharString(6, ' ') << "24-HOUR CLOCK" << nCharString(6, ' ') << nCharString(1, '*') << std::endl;
     std::cout << std::endl;
-    std::cout << nCharClockString(1, '*') << nCharClockString(6, ' ') << formatTime12(h, m, s) << nCharClockString(7, ' ') << nCharClockString(1, '*') << nCharClockString(3, ' ');
-    std::cout << nCharClockString(1, '*') << nCharClockString(8, ' ') << formatTime24(h, m, s) << nCharClockString(9, ' ') << nCharClockString(1, '*') << std::endl;
-    std::cout << nCharClockString(27, '*') << nCharClockString(3, ' ') << nCharClockString(27, '*') << std::endl;
+    std::cout << nCharString(1, '*') << nCharString(6, ' ') << formatTime12(h, m, s) << nCharString(7, ' ') << nCharString(1, '*') << nCharString(3, ' ');
+    std::cout << nCharString(1, '*') << nCharString(8, ' ') << formatTime24(h, m, s) << nCharString(9, ' ') << nCharString(1, '*') << std::endl;
+    std::cout << nCharString(27, '*') << nCharString(3, ' ') << nCharString(27, '*') << std::endl;
 }
+
 
