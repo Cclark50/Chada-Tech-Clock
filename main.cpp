@@ -13,15 +13,7 @@ using namespace std;
  *The program will also ask the user to set the time of the clock at the start
  */
 
-string nCharString(size_t n, char c)
-{
-    string str = "";
-    for(int i = 0; i < n; i++)
-    {
-        str += c;
-    }
-    return str;
-}
+extern string nCharString(size_t n, char c);
 
 //prints the menu we use to show valid inputs
 void printMenu(string strings[], unsigned int numStrings, unsigned int width)

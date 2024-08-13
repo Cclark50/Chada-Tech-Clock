@@ -26,7 +26,6 @@ public:
     void displayClocks();
     std::string formatTime12(unsigned int h, unsigned int m, unsigned int s);
     std::string formatTime24(unsigned int h, unsigned int m, unsigned int s);
-    std::string nCharClockString(size_t n, char c);
     std::string twoDigitString(unsigned int n);
     //default constructor
     Clock();
